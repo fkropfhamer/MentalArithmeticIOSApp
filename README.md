@@ -1,0 +1,4 @@
+# MentalArithmeticIOSApp
+
+build with SwiftUI
+

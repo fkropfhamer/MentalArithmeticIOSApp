@@ -9,8 +9,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var score: Int = 0;
+    
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            Text("Score: \(self.score)")
+            Text("Task")
+            HStack {
+                VStack {
+                    TextField("Result", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/).keyboardType(.numberPad)
+                }
+                Button(action: {self.score += 1}) {
+                    Text("Submit")
+                }
+            }
+        }
     }
 }
 

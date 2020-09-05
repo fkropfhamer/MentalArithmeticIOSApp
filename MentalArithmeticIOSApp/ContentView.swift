@@ -9,17 +9,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var score: Int = 0;
+    @ObservedObject var model: ContentViewModel = ContentViewModel();
+    @State var input: String = ""
     
     var body: some View {
         VStack {
-            Text("Score: \(self.score)")
-            Text("Task")
+            Text("Score: \(self.model.score)")
+            Text("Task: \(self.model.task)")
             HStack {
                 VStack {
-                    TextField("Result", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/).keyboardType(.numberPad)
+                    TextField("Result", text: self.$input).keyboardType(.numberPad)
                 }
-                Button(action: {self.score += 1}) {
+                Button(action: {self.model.submit(input: self.input)}) {
                     Text("Submit")
                 }
             }

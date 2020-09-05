@@ -12,6 +12,11 @@ struct ContentView: View {
     @ObservedObject var model: ContentViewModel = ContentViewModel();
     @State var input: String = ""
     
+    func submit() {
+        self.model.submit(input: self.input);
+        self.input = "";
+    }
+    
     var body: some View {
         VStack {
             Text("Score: \(self.model.score)")
@@ -20,7 +25,7 @@ struct ContentView: View {
                 VStack {
                     TextField("Result", text: self.$input).keyboardType(.numberPad)
                 }
-                Button(action: {self.model.submit(input: self.input)}) {
+                Button(action: {self.submit()}) {
                     Text("Submit")
                 }
             }

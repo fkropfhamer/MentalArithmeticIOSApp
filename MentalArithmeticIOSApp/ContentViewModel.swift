@@ -25,40 +25,54 @@ class ContentViewModel: ObservableObject {
         self.createTask();
     }
     
+    func createAdditionTask() {
+        let a = Int.random(in: 1..<100);
+        let b = Int.random(in: 1..<100);
+        self.task = "\(a) + \(b)";
+        self.result = a + b;
+    }
     
+    func createSubtractionTask() {
+        let a = Int.random(in: 1..<100);
+        let b = Int.random(in: 1..<100);
+        
+        if (a > b) {
+            self.task = "\(a) - \(b)";
+            self.result = a - b;
+            return;
+        }
+        self.task = "\(b) - \(a)";
+        self.result = b - a;
+    }
+    
+    func createMultiplicationTask() {
+        let a = Int.random(in: 1..<11);
+        let b = Int.random(in: 1..<11);
+        self.task = "\(a) * \(b)";
+        self.result = a * b;
+    }
 
+    func createDivisionTask() {
+        let a = Int.random(in: 1..<11);
+        let b = Int.random(in: 1..<11);
+        let c = a * b
+        self.task = "\(c) / \(b)";
+        self.result = a;
+    }
+    
     func createTask() {
         let randomTaskType = TaskType.allCases.randomElement();
         switch randomTaskType {
         case .Addition:
-            let a = Int.random(in: 1..<100);
-            let b = Int.random(in: 1..<100);
-            self.task = "\(a) + \(b)";
-            self.result = a + b;
+            self.createAdditionTask();
         case .Subtraction:
-            let a = Int.random(in: 1..<100);
-            let b = Int.random(in: 1..<100);
-            
-            if (a > b) {
-                self.task = "\(a) - \(b)";
-                self.result = a - b;
-                return;
-            }
-            self.task = "\(b) - \(a)";
-            self.result = b - a;
+            self.createSubtractionTask();
         case .Multiplication:
-            let a = Int.random(in: 1..<11);
-            let b = Int.random(in: 1..<11);
-            self.task = "\(a) * \(b)";
-            self.result = a * b;
+            self.createMultiplicationTask();
         case .Division:
-            let a = Int.random(in: 1..<11);
-            let b = Int.random(in: 1..<11);
-            let c = a * b
-            self.task = "\(c) / \(b)";
-            self.result = a;
+            self.createDivisionTask();
         default:
-            print("");
+            self.createAdditionTask();
         }
         
         

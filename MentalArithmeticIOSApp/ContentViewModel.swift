@@ -10,8 +10,22 @@ import Foundation
 
 class ContentViewModel: ObservableObject {
     @Published var score: Int = 0;
-    @Published var task: String = "1 + 1";
+    @Published var task: String = "";
+    
+    var result: Int = 0;
+    
+    init() {
+        self.createTask();
+    }
+    
+    
 
+    func createTask() {
+        let a = Int.random(in: 1..<100);
+        let b = Int.random(in: 1..<100);
+        self.task = "\(a) + \(b)";
+        self.result = a + b;
+    }
     
     func increaseScore() {
         self.score += 1;
@@ -20,6 +34,10 @@ class ContentViewModel: ObservableObject {
     
     func submit(input: String) {
         print(input);
-        self.increaseScore();
+        let intInput = Int(input);
+        if (intInput == self.result) {
+            self.increaseScore();
+            self.createTask();
+        }
     }
 }

@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum TaskType: CaseIterable {
+    case Addition
+    case Subtraction
+    case Multiplication
+    case Division
+}
+
 class ContentViewModel: ObservableObject {
     @Published var score: Int = 0;
     @Published var task: String = "";
@@ -21,10 +28,40 @@ class ContentViewModel: ObservableObject {
     
 
     func createTask() {
-        let a = Int.random(in: 1..<100);
-        let b = Int.random(in: 1..<100);
-        self.task = "\(a) + \(b)";
-        self.result = a + b;
+        let randomTaskType = TaskType.allCases.randomElement();
+        switch randomTaskType {
+        case .Addition:
+            let a = Int.random(in: 1..<100);
+            let b = Int.random(in: 1..<100);
+            self.task = "\(a) + \(b)";
+            self.result = a + b;
+        case .Subtraction:
+            let a = Int.random(in: 1..<100);
+            let b = Int.random(in: 1..<100);
+            
+            if (a > b) {
+                self.task = "\(a) - \(b)";
+                self.result = a - b;
+                return;
+            }
+            self.task = "\(b) - \(a)";
+            self.result = b - a;
+        case .Multiplication:
+            let a = Int.random(in: 1..<11);
+            let b = Int.random(in: 1..<11);
+            self.task = "\(a) * \(b)";
+            self.result = a * b;
+        case .Division:
+            let a = Int.random(in: 1..<11);
+            let b = Int.random(in: 1..<11);
+            let c = a * b
+            self.task = "\(c) / \(b)";
+            self.result = a;
+        default:
+            print("");
+        }
+        
+        
     }
     
     func increaseScore() {
